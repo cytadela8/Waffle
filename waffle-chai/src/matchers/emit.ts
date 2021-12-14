@@ -95,6 +95,7 @@ export function supportEmit(Assertion: Chai.AssertionStatic) {
 
   Assertion.addMethod('withArgs', function (this: any, ...expectedArgs: any[]) {
     const derivedPromise = this.promise.then(() => {
+      // FIXME: HERE WE NEED TO COPY CONTEXT OR JUST THE EVENT NAME
       tryAssertArgsArraysEqual(this, expectedArgs, this.logs);
     });
     this.then = derivedPromise.then.bind(derivedPromise);
